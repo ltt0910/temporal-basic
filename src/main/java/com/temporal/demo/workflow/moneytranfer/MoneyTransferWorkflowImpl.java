@@ -1,5 +1,6 @@
-package com.temporal.demo.moneytransferapp;
+package com.temporal.demo.workflow.moneytranfer;
 
+import com.temporal.demo.activity.moneytranfer.AccountActivity;
 import com.temporal.demo.response.Response;
 import com.temporal.demo.common.Constants;
 import com.temporal.demo.request.TransferRequest;
