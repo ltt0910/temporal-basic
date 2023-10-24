@@ -1,16 +1,13 @@
 package com.temporal.demo.service;
 
-import com.temporal.demo.Response;
+import com.temporal.demo.response.Response;
 import com.temporal.demo.moneytransferapp.MoneyTransferWorkflow;
 import com.temporal.demo.moneytransferapp.Shared;
 import com.temporal.demo.request.TransferRequest;
-import io.temporal.api.common.v1.WorkflowExecution;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 // money-transfer-project-template-java-workflow-initiator
 @Service

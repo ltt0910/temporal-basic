@@ -1,4 +1,4 @@
-package com.temporal.demo;
+package com.temporal.demo.response;
 
 import lombok.Builder;
 import lombok.Getter;

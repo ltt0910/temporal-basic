@@ -1,6 +1,6 @@
 package com.temporal.demo.moneytransferapp;
 
-import com.temporal.demo.Response;
+import com.temporal.demo.response.Response;
 import com.temporal.demo.request.TransferRequest;
 
 //  money-transfer-project-template-java-activity-implementation
