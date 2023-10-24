@@ -1,4 +1,4 @@
-package com.temporal.demo.moneytransferapp;
+package com.temporal.demo.activity.moneytranfer;
 
 import com.temporal.demo.response.Response;
 import com.temporal.demo.request.TransferRequest;

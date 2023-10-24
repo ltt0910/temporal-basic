@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+
+temporal:
+  server: static://localhost:8099 #??a ch? temporal
+  isUseSsl: false
+  namespace: default #namespace trong temporal

@@ -1,4 +1,4 @@
-package com.temporal.demo.moneytransferapp;
+package com.temporal.demo.activity.moneytranfer;
 
 //  money-transfer-project-template-java-activity-interface
 
