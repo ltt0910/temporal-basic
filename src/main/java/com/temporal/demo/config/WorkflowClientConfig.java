@@ -1,23 +1,15 @@
 package com.temporal.demo.config;
 
-import io.grpc.netty.shaded.io.grpc.netty.GrpcSslContexts;
-import io.grpc.netty.shaded.io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowClientOptions;
-import io.temporal.client.WorkflowOptions;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
-import io.temporal.worker.WorkerFactoryOptions;
-import io.temporal.worker.WorkerOptions;
-import io.temporal.worker.WorkflowImplementationOptions;
+import io.temporal.worker.WorkerFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.net.ssl.SSLException;
 
 @Configuration
 @RequiredArgsConstructor
@@ -31,36 +23,20 @@ public class WorkflowClientConfig {
     private String nameSpace;
 
     @Bean
-    public WorkflowClient workflowClient() throws SSLException {
-        var workflowServiceStubsOptions = WorkflowServiceStubsOptions.newBuilder().setTarget(temporalServer);
-        var workflowOptions = workflowServiceStubsOptions.setSslContext(GrpcSslContexts.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build()).build();
-
-        var workflowService = WorkflowServiceStubs.newServiceStubs(workflowOptions);
-        return WorkflowClient.newInstance(workflowService, WorkflowClientOptions.newBuilder().setNamespace(nameSpace).build());
-    }
-
-    //todo add config workflow && activity neu can
-
-    //todo add tham so WorkerFactoryOptions
-    @Bean
-    public WorkerFactoryOptions defaultWorkerFactoryOptions() {
-        return WorkerFactoryOptions.newBuilder().build();
-    }
-
-
-    //todo add tham so workerOptions
-    @Bean
-    public WorkerOptions workerOptions() {
-        return WorkerOptions.newBuilder().build();
+    public WorkflowServiceStubs workflowServiceStubs() {
+        return WorkflowServiceStubs
+                .newInstance(WorkflowServiceStubsOptions.newBuilder().setTarget(temporalServer).build());
     }
 
     @Bean
-    public WorkflowImplementationOptions workflowImplementationOptions() {
-        return WorkflowImplementationOptions.newBuilder().build();
+    public WorkflowClient workflowClient(WorkflowServiceStubs workflowServiceStubs) {
+        return WorkflowClient
+                .newInstance(workflowServiceStubs, WorkflowClientOptions.newBuilder().setNamespace(nameSpace).build());
     }
 
     @Bean
-    public WorkflowOptions defaultWorkflowOptions() {
-        return WorkflowOptions.newBuilder().build();
+    public WorkerFactory workerFactory(WorkflowClient workflowClient) {
+        return WorkerFactory.newInstance(workflowClient);
     }
+
 }

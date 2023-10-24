@@ -11,11 +11,11 @@ import io.temporal.activity.ActivityMethod;
 public interface AccountActivity {
 
     @ActivityMethod
-    Response validate(TransferRequest request);
+    String validate(TransferRequest request) throws InterruptedException;
 
     @ActivityMethod
-    Response deposit(TransferRequest request);
+    String deposit(TransferRequest request);
 
     @ActivityMethod
-    Response transfer(TransferRequest request);
+    String transfer(TransferRequest request);
 }

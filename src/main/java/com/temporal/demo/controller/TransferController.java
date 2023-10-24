@@ -2,6 +2,7 @@ package com.temporal.demo.controller;
 
 import com.temporal.demo.request.TransferRequest;
 import com.temporal.demo.service.InitiateMoneyTransferService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1")
+@RequiredArgsConstructor
 public class TransferController {
 
-    @Autowired
-    private InitiateMoneyTransferService transferService;
+    final InitiateMoneyTransferService transferService;
 
     @PostMapping("/transfer")
     public ResponseEntity<?> transfer(@RequestBody TransferRequest request) throws Exception {

@@ -7,28 +7,19 @@ import com.temporal.demo.request.TransferRequest;
 public class AccountActivityImpl implements AccountActivity {
 
     @Override
-    public Response transfer(TransferRequest request) {
-
-        return Response.builder()
-                .code("ERROR").message("Faild")
-                .data(null)
-                .build();
+    public String transfer(TransferRequest request) {
+        return "SUCCESS";
     }
 
     @Override
-    public Response validate(TransferRequest request) {
-        return Response.builder()
-                .code("ERROR").message("Faild")
-                .data(null)
-                .build();
+    public String validate(TransferRequest request) throws InterruptedException {
+        Thread.sleep(40*1000);
+        return "SUCCESS";
     }
 
     @Override
-    public Response deposit(TransferRequest request) {
+    public String deposit(TransferRequest request) {
 
-        return Response.builder()
-                .code("ERROR").message("Faild")
-                .data(null)
-                .build();
+        return "SUCCESS";
     }
 }
