@@ -1,7 +1,7 @@
 package com.temporal.demo.worker.test;
 
 import com.temporal.demo.activity.test.TestActivityImpl;
-import com.temporal.demo.common.Constants;
+import com.temporal.demo.common.Function;
 import com.temporal.demo.workflow.test.TestWorkflowImpl;
 import io.temporal.client.WorkflowClient;
 import io.temporal.worker.Worker;
@@ -19,9 +19,8 @@ public class TestWorker {
 
     @PostConstruct
     public void initWorker() {
-        Worker worker = workerFactory.newWorker(Constants.TASK_QUEUE.TEST_TASK_QUEUE);
+        Worker worker = workerFactory.newWorker(Function.TEST_TASK_QUEUE.getFunctionName());
         worker.registerWorkflowImplementationTypes(TestWorkflowImpl.class);
         worker.registerActivitiesImplementations(new TestActivityImpl());
-//        workerFactory.start();
     }
 }

@@ -1,7 +1,8 @@
 package com.temporal.demo.common;
 
 public enum Function {
-    MONEY_TRANSFER_TASK_QUEUE("MONEY_TRANSFER_TASK_QUEUE");
+    MONEY_TRANSFER_TASK_QUEUE("MONEY_TRANSFER_TASK_QUEUE"),
+    TEST_TASK_QUEUE("TEST_TASK_QUEUE");
     private final String functionName;
 
     Function(String functionName) {
