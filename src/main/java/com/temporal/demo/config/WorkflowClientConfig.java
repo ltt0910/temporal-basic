@@ -7,13 +7,11 @@ import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import io.temporal.worker.WorkerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableAutoConfiguration
 public class WorkflowClientConfig {
 
     @Value("${temporal.server}")
@@ -25,7 +23,7 @@ public class WorkflowClientConfig {
     @Bean
     public WorkflowServiceStubs workflowServiceStubs() {
         return WorkflowServiceStubs
-                .newInstance(WorkflowServiceStubsOptions.newBuilder().setTarget(temporalServer).build());
+                .newServiceStubs(WorkflowServiceStubsOptions.newBuilder().setTarget(temporalServer).build());
     }
 
     @Bean

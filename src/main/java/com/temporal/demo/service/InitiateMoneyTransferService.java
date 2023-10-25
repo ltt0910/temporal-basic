@@ -1,6 +1,7 @@
 package com.temporal.demo.service;
 
 import com.temporal.demo.common.Function;
+import com.temporal.demo.exception.BusinessException;
 import com.temporal.demo.request.TransferRequest;
 import com.temporal.demo.workflow.moneytranfer.MoneyTransferWorkflow;
 import io.temporal.client.WorkflowClient;
@@ -18,13 +19,20 @@ public class InitiateMoneyTransferService {
 
     final WorkflowClient workflowClient;
 
-    public String transfer(TransferRequest transferRequest) throws Exception {
+    public String transfer(TransferRequest transferRequest) throws BusinessException {
 
-        var workflow = workflowClient.newWorkflowStub(MoneyTransferWorkflow.class,
+        MoneyTransferWorkflow moneyTransferWorkflow = workflowClient.newWorkflowStub(MoneyTransferWorkflow.class,
                 WorkflowOptions.newBuilder()
                         .setTaskQueue(Function.MONEY_TRANSFER_TASK_QUEUE.getFunctionName())
                         .setWorkflowId(String.valueOf(UUID.randomUUID()))
                         .build());
-        return workflow.transfer(transferRequest);
+
+        String result = "";
+        try {
+            result = moneyTransferWorkflow.transfer(transferRequest);
+        } catch (BusinessException be) {
+            result = "Fail";
+        }
+        return result;
     }
 }

@@ -1,9 +1,8 @@
 package com.temporal.demo.exception;
 
-public class BusinessException extends Exception{
-    private String mesage;
+public class BusinessException extends Exception {
 
-    public BusinessException(String mesage) {
-        this.mesage = mesage;
+    public BusinessException(String message) {
+        super(message);
     }
 }

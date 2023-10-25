@@ -1,5 +1,6 @@
 package com.temporal.demo.controller;
 
+import com.temporal.demo.exception.BusinessException;
 import com.temporal.demo.request.TransferRequest;
 import com.temporal.demo.service.InitiateMoneyTransferService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class TransferController {
     final InitiateMoneyTransferService transferService;
 
     @PostMapping("/transfer")
-    public ResponseEntity<?> transfer(@RequestBody TransferRequest request) throws Exception {
+    public ResponseEntity<?> transfer(@RequestBody TransferRequest request) throws BusinessException {
         return ResponseEntity.of(Optional.of(transferService.transfer(request)));
     }
 

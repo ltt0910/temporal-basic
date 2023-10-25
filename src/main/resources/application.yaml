@@ -1,8 +1,6 @@
 server:
   port: 8081
 
-
 temporal:
-  server: localhost:7233 #??a ch? temporal
-  isUseSsl: false
+  server: localhost:7233 #địa chỉ temporal
   namespace: demo #namespace trong temporal
