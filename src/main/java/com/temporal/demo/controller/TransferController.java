@@ -2,9 +2,8 @@ package com.temporal.demo.controller;
 
 import com.temporal.demo.exception.BusinessException;
 import com.temporal.demo.request.TransferRequest;
-import com.temporal.demo.service.InitiateMoneyTransferService;
+import com.temporal.demo.service.MoneyTransferService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TransferController {
 
-    final InitiateMoneyTransferService transferService;
+    final MoneyTransferService transferService;
 
     @PostMapping("/transfer")
     public ResponseEntity<?> transfer(@RequestBody TransferRequest request) throws BusinessException {

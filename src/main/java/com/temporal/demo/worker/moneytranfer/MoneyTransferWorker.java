@@ -25,6 +25,6 @@ public class MoneyTransferWorker {
         Worker worker = workerFactory.newWorker(Function.MONEY_TRANSFER_TASK_QUEUE.getFunctionName());
         worker.registerWorkflowImplementationTypes(MoneyTransferWorkflowImpl.class);
         worker.registerActivitiesImplementations(new AccountActivityImpl());
-        workerFactory.start();
+//        workerFactory.start();
     }
 }

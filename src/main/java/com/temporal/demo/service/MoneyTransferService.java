@@ -7,7 +7,6 @@ import com.temporal.demo.workflow.moneytranfer.MoneyTransferWorkflow;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import java.util.UUID;
 // money-transfer-project-template-java-workflow-initiator
 @Service
 @RequiredArgsConstructor
-public class InitiateMoneyTransferService {
+public class MoneyTransferService {
 
     final WorkflowClient workflowClient;
 
