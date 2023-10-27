@@ -1,7 +1,13 @@
 package com.temporal.demo.config;
 
+import com.uber.m3.tally.RootScopeBuilder;
+import com.uber.m3.tally.Scope;
+import com.uber.m3.tally.StatsReporter;
+import io.micrometer.prometheus.PrometheusConfig;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowClientOptions;
+import io.temporal.common.reporter.MicrometerClientStatsReporter;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import io.temporal.worker.WorkerFactory;
@@ -21,9 +27,21 @@ public class WorkflowClientConfig {
     private String nameSpace;
 
     @Bean
-    public WorkflowServiceStubs workflowServiceStubs() {
+    public Scope scope() {
+        PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+        StatsReporter reporter = new MicrometerClientStatsReporter(registry);
+        return new RootScopeBuilder()
+                .reporter(reporter)
+                .reportEvery(com.uber.m3.util.Duration.ofSeconds(10));
+    }
+
+    @Bean
+    public WorkflowServiceStubs workflowServiceStubs(Scope scope) {
         return WorkflowServiceStubs
-                .newServiceStubs(WorkflowServiceStubsOptions.newBuilder().setTarget(temporalServer).build());
+                .newServiceStubs(WorkflowServiceStubsOptions
+                        .newBuilder()
+                        .setMetricsScope(scope)
+                        .setTarget(temporalServer).build());
     }
 
     @Bean

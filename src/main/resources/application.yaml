@@ -3,4 +3,11 @@ server:
 
 temporal:
   server: localhost:7233 #địa chỉ temporal
-  namespace: demo #namespace trong temporal
+  namespace: default #namespace trong temporal
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus
